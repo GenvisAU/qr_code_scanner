@@ -85,8 +85,8 @@ class QrScannerOverlayShape extends ShapeBorder {
       ..blendMode = BlendMode.dstOut;
 
     final cutOutRect = Rect.fromLTWH(
-      rect.left + width / 2 - _cutOutSize / 2 + borderOffset,
-      rect.top + height / 2 - _cutOutSize / 2 + borderOffset,
+      width / 2 - _cutOutSize / 2 + borderOffset,
+      height / 2 - _cutOutSize / 2 + borderOffset,
       _cutOutSize - borderOffset * 2,
       _cutOutSize - borderOffset * 2,
     );
