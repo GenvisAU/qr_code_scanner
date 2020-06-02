@@ -36,7 +36,7 @@ class _QRViewState extends State<QRView> {
             decoration: ShapeDecoration(
               shape: widget.overlay,
             ),
-            margin: widget.overlayMargin,
+            padding: widget.overlayMargin,
           )
         else
           Container(),
