@@ -23,11 +23,11 @@ public class QRView:NSObject,FlutterPlatformView {
     func isCameraAvailable(success: Bool) -> Void {
         if success {
             do {
-                try scanner?.startScanning(resultBlock: { codes in
+                try scanner?.startScanning(resultBlock: { [weak self] codes in
                     if let codes = codes {
                         for code in codes {
                             guard let stringValue = code.stringValue else { continue }
-                            self.channel.invokeMethod("onRecognizeQR", arguments: stringValue)
+                            self?.channel.invokeMethod("onRecognizeQR", arguments: stringValue)
                         }
                     }
                 })
@@ -44,7 +44,7 @@ public class QRView:NSObject,FlutterPlatformView {
             [weak self] (call: FlutterMethodCall, result: FlutterResult) -> Void in
             switch(call.method){
                 case "setDimensions":
-                    var arguments = call.arguments as! Dictionary<String, Double>
+                    let arguments = call.arguments as! Dictionary<String, Double>
                     self?.setDimensions(width: arguments["width"] ?? 0,height: arguments["height"] ?? 0)
                 case "flipCamera":
                     self?.flipCamera()
