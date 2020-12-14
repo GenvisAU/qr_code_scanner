@@ -10,7 +10,8 @@ class QRView extends StatefulWidget {
   const QRView({
     @required Key key,
     @required this.onQRViewCreated,
-    this.overlay
+    this.overlay,
+    this.overlayMargin = EdgeInsets.zero,
   })  : assert(key != null),
         assert(onQRViewCreated != null),
         super(key: key);
@@ -18,6 +19,7 @@ class QRView extends StatefulWidget {
   final QRViewCreatedCallback onQRViewCreated;
 
   final ShapeBorder overlay;
+  final EdgeInsetsGeometry overlayMargin;
 
   @override
   State<StatefulWidget> createState() => _QRViewState();
@@ -31,9 +33,10 @@ class _QRViewState extends State<QRView> {
         _getPlatformQrView(),
         if (widget.overlay != null)
           Container(
+            padding: widget.overlayMargin,
             decoration: ShapeDecoration(
               shape: widget.overlay,
-            )
+            ),
           )
         else
           Container(),

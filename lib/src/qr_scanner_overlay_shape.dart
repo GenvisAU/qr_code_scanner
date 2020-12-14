@@ -10,6 +10,7 @@ class QrScannerOverlayShape extends ShapeBorder {
     this.borderRadius = 0,
     this.borderLength = 40,
     this.cutOutSize = 250,
+    this.cutOutBottomOffset = 0,
   }) : assert(
             cutOutSize != null ??
                 cutOutSize != null ??
@@ -22,6 +23,7 @@ class QrScannerOverlayShape extends ShapeBorder {
   final double borderRadius;
   final double borderLength;
   final double cutOutSize;
+  final double cutOutBottomOffset;
 
   @override
   EdgeInsetsGeometry get dimensions => const EdgeInsets.all(10);
@@ -85,8 +87,12 @@ class QrScannerOverlayShape extends ShapeBorder {
       ..blendMode = BlendMode.dstOut;
 
     final cutOutRect = Rect.fromLTWH(
-      width / 2 - _cutOutSize / 2 + borderOffset,
-      height / 2 - _cutOutSize / 2 + borderOffset,
+      rect.left + width / 2 - _cutOutSize / 2 + borderOffset,
+      -cutOutBottomOffset +
+          rect.top +
+          height / 2 -
+          _cutOutSize / 2 +
+          borderOffset,
       _cutOutSize - borderOffset * 2,
       _cutOutSize - borderOffset * 2,
     );
